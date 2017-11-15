@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--EditLayout-->
+    <declare-styleable name="EditLayout">
+        <attr name="tag_color" format="color"/>
+        <attr name="hint_color" format="color"/>
+        <attr name="content_color" format="color"/>
+        <attr name="tag_size" format="dimension"/>
+        <attr name="content_size" format="dimension"/>
+        <attr name="has_next_page" format="boolean"/>
+        <attr name="tag_txt" format="string"/>
+        <attr name="hint_txt" format="string"/>
+        <attr name="content_txt" format="string"/>
+        <attr name="lines" format="integer"/>
+        <attr name="max_line" format="integer"/>
+        <attr name="ellipsize">
+            <enum name="start" value="0"/>
+            <enum name="middle" value="1"/>
+            <enum name="end" value="2"/>
+            <enum name="marquee" value="3"/>
+        </attr>
+        <attr name="content_widget">
+            <enum name="edittext" value="0"/>
+            <enum name="textview" value="1"/>
+        </attr>
+        <attr name="content_gravity">
+            <enum name="left" value="-1"/>
+            <enum name="center" value="0"/>
+            <enum name="right" value="1"/>
+        </attr>
+        <attr name="input_type">
+            <enum name="number" value="0"/>
+            <enum name="text" value="1"/>
+            <enum name="date" value="2"/>
+            <enum name="datetime" value="3"/>
+            <enum name="numberDecimal" value="4"/>
+            <enum name="numberPassword" value="5"/>
+            <enum name="numberSigned" value="6"/>
+            <enum name="phone" value="7"/>
+            <enum name="textAutoComplete" value="8"/>
+            <enum name="textAutoCorrect" value="9"/>
+            <enum name="textEmailAddress" value="10"/>
+            <enum name="textFilter" value="11"/>
+            <enum name="textPassword" value="12"/>
+            <enum name="textPersonName" value="13"/>
+            <enum name="textUri" value="14"/>
+            <enum name="textVisiblePassword" value="15"/>
+        </attr>
+    </declare-styleable>
+
+</resources>
