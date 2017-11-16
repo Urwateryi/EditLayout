@@ -28,7 +28,6 @@ public class EditLayout extends RelativeLayout {
 
     private Context mContext;
 
-    private RelativeLayout mRlRoot;//根布局
     private TextView mTvTxtTag;//item的名称
     private FrameLayout mFlContent;//显示的内容
     private ImageView mIvNext;//下一页图标
@@ -48,6 +47,7 @@ public class EditLayout extends RelativeLayout {
 
     private int mLines;//行数
     private int mMaxLines;//最大行数
+	
     private TextUtils.TruncateAt mEllipsize;//折叠方式
     private static final int ELLIPSIZE_START = 0;
     private static final int ELLIPSIZE_MIDDLE = 1;
@@ -123,7 +123,7 @@ public class EditLayout extends RelativeLayout {
      */
     public void setContentTxt(String contentTxt) {
         mContentTxt = contentTxt;
-        //        invalidate();//只能在主线程中调用
+//        invalidate();//只能在主线程中调用
         postInvalidate();//可以在子线程中调用
     }
 
@@ -133,7 +133,7 @@ public class EditLayout extends RelativeLayout {
      * @param attrs
      */
     private void initAttr(AttributeSet attrs) {
-        TypedArray typedArray = mContext.obtainStyledAttributes(attrs, R.styleable.EditLayout);
+        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.EditLayout);
 
         mTagColor = typedArray.getColor(R.styleable.EditLayout_tag_color, getResources().getColor(R.color.default_black));
         mHintColor = typedArray.getColor(R.styleable.EditLayout_hint_color, getResources().getColor(R.color.default_gray_light));
@@ -219,9 +219,8 @@ public class EditLayout extends RelativeLayout {
      * 初始化布局
      */
     private void initView() {
-        View view = View.inflate(mContext, R.layout.lay_edit_layout, this);
+        View view = View.inflate(getContext(), R.layout.lay_edit_layout, this);
 
-        mRlRoot = view.findViewById(R.id.rl_root);
         mTvTxtTag = view.findViewById(R.id.tv_txt_tag);
         mFlContent = view.findViewById(R.id.fl_content);
         mIvNext = view.findViewById(R.id.iv_next);
@@ -282,7 +281,9 @@ public class EditLayout extends RelativeLayout {
         //是否有二级页面
         if (mIsHasNextPage) {
             mIvNext.setVisibility(VISIBLE);
-            mRlRoot.setOnClickListener(v -> mLisenter.onClickItem(mContentTxt));
+            this.setOnClickListener(v -> {
+                mLisenter.onClickItem(mContentTxt);
+            });
         } else {
             mIvNext.setVisibility(INVISIBLE);
         }
