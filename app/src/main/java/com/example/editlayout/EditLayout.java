@@ -123,7 +123,8 @@ public class EditLayout extends RelativeLayout {
      */
     public void setContentTxt(String contentTxt) {
         mContentTxt = contentTxt;
-        invalidate();
+        //        invalidate();//只能在主线程中调用
+        postInvalidate();//可以在子线程中调用
     }
 
     /**
