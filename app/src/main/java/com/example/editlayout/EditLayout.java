@@ -47,11 +47,11 @@ public class EditLayout extends RelativeLayout {
 
     private int mLines;//行数
     private int mMaxLines;//最大行数
-	
+
     private TextUtils.TruncateAt mEllipsize;//折叠方式
     private static final int ELLIPSIZE_START = 0;
     private static final int ELLIPSIZE_MIDDLE = 1;
-    private static final int ELLIPSIZE_END= 2;
+    private static final int ELLIPSIZE_END = 2;
     private static final int ELLIPSIZE_MARQUEE = 3;
 
     private static final int DEFAULT_LINE = 1;//默认输入一行
@@ -75,6 +75,8 @@ public class EditLayout extends RelativeLayout {
 
     private int mInputType;//输入类型
 
+    private int mContentMarginLeft;//内容距离左边的距离
+
     private static final int INPUT_TYPE_NUMBER = 0;
     private static final int INPUT_TYPE_TEXT = 1;
     private static final int INPUT_TYPE_DATE = 2;
@@ -95,7 +97,7 @@ public class EditLayout extends RelativeLayout {
     private final AutoLayoutHelper mHelper = new AutoLayoutHelper(this);
 
     //内容的控件：EditText或者TextView
-    private enum CONTENT_WIDGET {
+    protected enum CONTENT_WIDGET {
         EDITTEXT, TEXTVIEW
     }
 
@@ -116,15 +118,181 @@ public class EditLayout extends RelativeLayout {
         initView();
     }
 
-    /**
-     * 设置
-     *
-     * @param contentTxt
-     */
-    public void setContentTxt(String contentTxt) {
+    public int getContentGravity() {
+        return mContentGravity;
+    }
+
+    public EditLayout setContentGravity(int contentGravity) {
+        mContentGravity = contentGravity;
+        if (etContent != null) {
+            etContent.setGravity(contentGravity);
+        }
+        if (tvContent != null) {
+            tvContent.setGravity(contentGravity);
+        }
+        return this;
+    }
+
+    public CONTENT_WIDGET getContentWidget() {
+        return mContentWidget;
+    }
+
+    public EditLayout setContentWidget(CONTENT_WIDGET contentWidget) {
+        mContentWidget = contentWidget;
+        return this;
+    }
+
+    public EditLayout setContentTxt(String contentTxt) {
         mContentTxt = contentTxt;
-//        invalidate();//只能在主线程中调用
-        postInvalidate();//可以在子线程中调用
+        if (etContent != null) {
+            etContent.setText(mContentTxt);
+        }
+        if (tvContent != null) {
+            tvContent.setText(mContentTxt);
+        }
+        return this;
+    }
+
+    public int getInputType() {
+        return mInputType;
+    }
+
+    public EditLayout setInputType(int inputType) {
+        mInputType = inputType;
+        if (etContent != null) {
+            etContent.setInputType(inputType);
+        }
+        return this;
+    }
+
+    public int getTagColor() {
+        return mTagColor;
+    }
+
+    public EditLayout setTagColor(int tagColor) {
+        mTagColor = tagColor;
+        if (mTvTxtTag != null) {
+            mTvTxtTag.setTextColor(tagColor);
+        }
+        return this;
+    }
+
+    public int getHintColor() {
+        return mHintColor;
+    }
+
+    public EditLayout setHintColor(int hintColor) {
+        mHintColor = hintColor;
+        if (etContent != null) {
+            etContent.setHintTextColor(hintColor);
+        }
+        if (tvContent != null) {
+            tvContent.setHintTextColor(hintColor);
+        }
+        return this;
+    }
+
+    public int getContentColor() {
+        return mContentColor;
+    }
+
+    public EditLayout setContentColor(int contentColor) {
+        mContentColor = contentColor;
+        if (etContent != null) {
+            etContent.setTextColor(contentColor);
+        }
+        if (tvContent != null) {
+            tvContent.setTextColor(contentColor);
+        }
+        return this;
+    }
+
+    public int getTagSize() {
+        return mTagSize;
+    }
+
+    public EditLayout setTagSize(int tagSize) {
+        mTagSize = tagSize;
+        if (mTvTxtTag != null) {
+            mTvTxtTag.setTextSize(mTagSize);
+        }
+        return this;
+    }
+
+    public int getContentSize() {
+        return mContentSize;
+    }
+
+    public EditLayout setContentSize(int contentSize) {
+        mContentSize = contentSize;
+        if (etContent != null) {
+            etContent.setTextSize(mContentSize);
+        }
+        if (tvContent != null) {
+            tvContent.setTextSize(mContentSize);
+        }
+        return this;
+    }
+
+    public boolean isHasNextPage() {
+        return mIsHasNextPage;
+    }
+
+    public EditLayout setHasNextPage(boolean hasNextPage) {
+        mIsHasNextPage = hasNextPage;
+        if (mIsHasNextPage) {
+            if (mIvNext != null)
+                mIvNext.setVisibility(VISIBLE);
+        } else {
+            if (mIvNext != null)
+                mIvNext.setVisibility(INVISIBLE);
+        }
+        return this;
+    }
+
+    public String getTagTxt() {
+        return mTagTxt;
+    }
+
+    public EditLayout setTagTxt(String tagTxt) {
+        mTagTxt = tagTxt;
+        if (mTvTxtTag != null) {
+            mTvTxtTag.setText(tagTxt);
+        }
+        return this;
+    }
+
+    public String getContentTxt() {
+        return mContentTxt;
+    }
+
+    public String getHintTxt() {
+        return mHintTxt;
+    }
+
+    public EditLayout setHintTxt(String hintTxt) {
+        mHintTxt = hintTxt;
+        if (etContent != null) {
+            etContent.setHint(mHintTxt);
+        }
+        if (tvContent != null) {
+            tvContent.setHint(mHintTxt);
+        }
+        return this;
+    }
+
+    public int getContentMarginLeft() {
+        return mContentMarginLeft;
+    }
+
+    public EditLayout setContentMarginLeft(int contentMarginLeft) {
+        mContentMarginLeft = contentMarginLeft;
+        if (mFlContent != null) {
+            RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) mFlContent.getLayoutParams();
+            lp.setMargins(contentMarginLeft, 0, 0, 0);
+            mFlContent.setLayoutParams(lp);
+        }
+        return this;
     }
 
     /**
@@ -133,6 +301,7 @@ public class EditLayout extends RelativeLayout {
      * @param attrs
      */
     private void initAttr(AttributeSet attrs) {
+
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.EditLayout);
 
         mTagColor = typedArray.getColor(R.styleable.EditLayout_tag_color, getResources().getColor(R.color.default_black));
@@ -321,21 +490,6 @@ public class EditLayout extends RelativeLayout {
             mHelper.adjustChildren();
         }
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-    }
-
-    @Override
-    protected void dispatchDraw(Canvas canvas) {
-        super.dispatchDraw(canvas);
-
-        if (mContentWidget == CONTENT_WIDGET.EDITTEXT) {
-            if (etContent != null) {
-                etContent.setText(mContentTxt);
-            }
-        } else if (mContentWidget == CONTENT_WIDGET.TEXTVIEW) {
-            if (tvContent != null) {
-                tvContent.setText(mContentTxt);
-            }
-        }
     }
 
     //整个Item的点击事件
