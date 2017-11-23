@@ -3,15 +3,15 @@
 
     <!--EditLayout-->
     <declare-styleable name="EditLayout">
-        <attr name="tag_color" format="color"/>
-        <attr name="hint_color" format="color"/>
-        <attr name="content_color" format="color"/>
-        <attr name="tag_size" format="dimension"/>
-        <attr name="content_size" format="dimension"/>
+       <attr name="tag_color" format="color|reference"/>
+        <attr name="hint_color" format="color|reference"/>
+        <attr name="content_color" format="color|reference"/>
+        <attr name="tag_size" format="dimension|reference"/>
+        <attr name="content_size" format="dimension|reference"/>
         <attr name="has_next_page" format="boolean"/>
-        <attr name="tag_txt" format="string"/>
-        <attr name="hint_txt" format="string"/>
-        <attr name="content_txt" format="string"/>
+        <attr name="tag_txt" format="string|reference"/>
+        <attr name="hint_txt" format="string|reference"/>
+        <attr name="content_txt" format="string|reference"/>
         <attr name="lines" format="integer"/>
         <attr name="max_line" format="integer"/>
         <attr name="ellipsize">
