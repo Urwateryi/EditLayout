@@ -6,8 +6,8 @@
        <attr name="tag_color" format="color|reference"/>
         <attr name="hint_color" format="color|reference"/>
         <attr name="content_color" format="color|reference"/>
-        <attr name="tag_size" format="dimension|reference"/>
-        <attr name="content_size" format="dimension|reference"/>
+        <attr name="tag_size" format="dimension"/>
+        <attr name="content_size" format="dimension"/>
         <attr name="has_next_page" format="boolean"/>
         <attr name="tag_txt" format="string|reference"/>
         <attr name="hint_txt" format="string|reference"/>
